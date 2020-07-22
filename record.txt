@@ -1,0 +1,98 @@
+
+
+TIME_WAIT 快速回收和重用
+
+
+net.ipv4.tcp_tw_reuse = 1
+net.ipv4.tcp_tw_recycle = 1
+net.ipv4.tcp_fin_timeout = 10
+net.ipv4.tcp_keepalive_time = 1200
+net.ipv4.tcp_keepalive_probes = 5
+net.ipv4.tcp_syn_retries = 2
+net.ipv4.tcp_orphan_retries = 3
+
+执行/sbin/sysctl -p让参数生效
+
+win10截屏
+
+win+shift+s
+
+
+查看是虚拟机还是物理机
+
+lshw -class system|grep VM
+dmidecode -s system-product-name
+
+mongo --host 11111.11.1.1 --port 27017 -uxxxx -pxxxx --authenticationDatabase admin
+
+
+
+mongodb导出数据：
+./mongoexport --host 1.1.1.1 --port 27017 -uxxxx -pxxxx --authenticationDatabase admin -d database -c table -o /tmp/xl.json --type json
+----------------------------------------------------
+
+撤回权限：
+revoke all on database.* from 'user'@'1.%';
+flush privileges; 
+
+----------------------------------------
+更改密码：
+set password for root@localhost=password('123456');
+数据库导出（包括数据和数据结构）
+mysqldump -h127.0.0.1  -uroot -pxxxx --databases xxxx >xxxx.sql
+数据库导出（只有数据结构）
+mysqldump -h127.0.0.1  -uroot -pxxxx -d  xxxx >xxxx.sql
+------------------------------------------
+
+mysql -uxxxx -pxxxx -DdatabaseName -e 'sql 语句' > result.txt
+-------------------------------------------
+批量替换
+ls 02* 03* 04* 05* 06* |xargs -t -i mv {} {}.bak
+-----------------------------------------------------------------------------------------------------------
+动态扩磁盘
+pvcreate /dev/sdb
+vgextend test /dev/sdb
+lvextend -L +2.00t /dev/mapper/test-u1
+resize2fs /dev/mapper/test-u1 ===> ext2/ext3/ext4
+xfs_growfs /dev/mapper/test-u1 ===> xfs
+
+{
+如果有问题执行尝试执行以下操作：
+#umount /u1
+#mkfs.xfs -f /dev/test/u1
+#mount /dev/test/u1 /u1
+
+lvextend -l +100%FREE /dev/mapper/test-u1
+lvextend -L +200G /dev/mapper/test-u1
+-----------------------------------------------------------------------------------------------------------
+cat accessLog.log | grep '[0-9][0-9][0-9][0-9][0-9] ms'
+-----------------------------------------------------------------------------------------------------------
+清理本地缓存：yum clean all
+重建yum源软件包信息缓存，提高查询速度：yum makecache
+-----------------------------------------------------------------------------------------------------------
+2 实际中的应用
+#!/bin/bash
+OLD_IFS=$IFS #保存原始值
+IFS="" #改变IFS的值
+...
+...
+IFS=$OLD_IFS #还原IFS的原始值
+
+按行读取
+IFS=$(echo -en "\n")
+------------------------------------------------------------------------------------------------------------
+截取某个时间段日志：
+eg: sed  -n "/2019-12-08 21:44:0/,/2019-12-08 22:12:0/p" aa.log.2019-12-08.log
+
+------------------------------------------------------------------------------------------------------------
+
+设置目录权限
+setfacl -m u:ops:r webservers/
+setfacl -R -m u:ops:r webservers/
+清除目录权限
+setfacl -x u:ops webservers/
+setfacl -b webservers/
+setfacl -R -b webservers/
+-------------------------------------------------------------------------------------------------------------
+
+jenkins passphrase解密：println( hudson.util.Secret.decrypt("CQD7sN825Rm6mVtjHELUQ0bwbsbEX4EbWZrtKAdiYKQ=") )

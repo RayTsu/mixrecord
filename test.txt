@@ -1,0 +1,37 @@
+
+
+create database xxxx default character set utf8 collate utf8_general_ci;
+
+
+create user 'xxxx'@'%' identified by 'xxxx';
+
+
+
+grant select,insert,update,delete,create on xxxx.* to xxxx;
+--------------------------------------------------------------------
+
+
+
+ grant all on xxxx.* to 'xxxx'@'%' identified by 'xxxx';
+
+
+
+grant all privileges on xxxx.*  to '1.%' identified by 'xxxx';
+flush privileges; 
+----------------------
+
+设置目录权限
+setfacl -m u:ops:r webservers/
+setfacl -R -m u:ops:r webservers/
+清除目录权限
+setfacl -x u:ops webservers/
+setfacl -b webservers/
+setfacl -R -b webservers/
+
+
+fdisk /dev/sdb
+partprobe
+pvcreate /dev/sdb1
+vgextend test /dev/sdb1
+lvextend -L +500G /dev/test/u1
+xfs_growfs /dev/test/u1

@@ -1,0 +1,25 @@
+ {
+            "jsonrpc": "2.0",
+            "method": "user.login",
+            "params": {
+                "user": rxxxx,
+                "password": xxx
+            },
+            "id": 1,
+            "auth": None
+        }
+		
+		
+		
+		
+1.curl -i -X POST -H 'Content-Type: application/json' -d '{"jsonrpc":
+"2.0","method":"user.login","params":{"user":"xxxx","password":"xxxx"},"auth":
+null,"id":0}' http://10.0.0.1/zabbix/api_jsonrpc.php		
+
+
+
+
+2.curl -i -X POST -H 'Content-Type: application/json' -d '{"jsonrpc": "2.0","method": "host.get","params": {"output": ["hostid","host"],"selectInterfaces": ["interfaceid","ip"]},"id": 2, "auth": "1cd225f1eb8e0fe3f4876edf95d2db01"}' http://10.0.0.1/zabbix/api_jsonrpc.php
+
+3. curl -i -X POST -H 'Content-Type: application/json' -d '{"jsonrpc": "2.0","method": "host.get","params": {"output": ["hostid","host"],"selectInterfaces": ["interfaceid","ip"]},"id": 2, "auth": "1cd225f1eb8e0fe3f4876edf95d2db01"}' http://10.0.0.1/zabbix/api_jsonrpc.php|egrep -o "(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])"
+
